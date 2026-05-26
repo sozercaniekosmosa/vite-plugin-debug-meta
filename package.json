@@ -1,0 +1,56 @@
+{
+  "name": "vite-plugin-debug-meta",
+  "version": "1.0.0",
+  "description": "Vite plugin to inject debug metadata (file paths and component names) into React JSX/TSX elements for inspect-on-click functionality.",
+  "main": "./dist/vite-plugin-debug-meta.js",
+  "module": "./dist/vite-plugin-debug-meta.mjs",
+  "types": "./dist/vite-plugin-debug-meta.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/vite-plugin-debug-meta.d.ts",
+      "import": "./dist/vite-plugin-debug-meta.mjs",
+      "require": "./dist/vite-plugin-debug-meta.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup vite-plugin-debug-meta.ts --format cjs,esm --dts --clean",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "vite",
+    "vite-plugin",
+    "vite-plugin-debug",
+    "react",
+    "react-debug",
+    "inspect",
+    "inspect-element",
+    "inspector",
+    "click-to-component",
+    "open-in-editor",
+    "babel",
+    "ast",
+    "dx",
+    "development-tools"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/generator": "^7.24.5",
+    "@babel/parser": "^7.24.5",
+    "@babel/traverse": "^7.24.5"
+  },
+  "peerDependencies": {
+    "vite": ">=2.0.0"
+  },
+  "devDependencies": {
+    "@types/babel__generator": "^7.6.8",
+    "@types/babel__traverse": "^7.20.6",
+    "@types/node": "^20.12.12",
+    "tsup": "^8.0.2",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.11"
+  }
+}
