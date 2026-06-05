@@ -12,5 +12,5 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["vite-plugin-debug-meta.ts"]
+  "include": ["vite-plugin-debug-meta/**/*"]
 }

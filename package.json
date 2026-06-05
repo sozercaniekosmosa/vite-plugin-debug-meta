@@ -16,7 +16,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsup vite-plugin-debug-meta.ts --format cjs,esm --dts --clean",
+    "build": "node scripts/build-css.js && tsup --entry.vite-plugin-debug-meta vite-plugin-debug-meta/index.ts --format cjs,esm --dts --clean",
     "prepublishOnly": "npm run build"
   },
   "keywords": [

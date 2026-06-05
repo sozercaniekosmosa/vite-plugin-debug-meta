@@ -1,0 +1,852 @@
+.debug-inspect-mode [disabled],
+.debug-inspect-mode :disabled,
+.debug-inspect-mode .disabled {
+  pointer-events: none !important;
+}
+
+.debug-inspect-mode [data-debug-file]:hover:not(:has([data-debug-file]:hover)) {
+  outline: 2px solid #10B981 !important;
+  outline-offset: -2px !important;
+  cursor: crosshair !important;
+}
+
+#debug-inspect-menu * {
+  box-sizing: border-box !important;
+}
+
+#debug-inspect-menu {
+  position: fixed !important;
+  z-index: 99999999 !important;
+  width: max-content !important;
+  min-width: 320px !important;
+  max-width: min(650px, 90vw) !important;
+  background-color: var(--dm-bg) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid var(--dm-border) !important;
+  border-radius: 12px !important;
+  box-shadow: var(--dm-shadow) !important;
+  padding: 5px !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+  font-size: 13px !important;
+  color: var(--dm-text-primary) !important;
+  opacity: 0 !important;
+  transform: scale(0.96) translateY(-4px) !important;
+  transition: opacity 0.15s cubic-bezier(0.16, 1, 0.3, 1), transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease !important;
+  pointer-events: auto !important;
+  user-select: none !important;
+
+  /* Default Dark Theme variables */
+  --dm-bg: rgba(18, 18, 24, 0.93) !important;
+  --dm-border: rgba(255, 255, 255, 0.08) !important;
+  --dm-shadow: 0 12px 40px rgba(0, 0, 0, 0.65), 0 4px 12px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+  --dm-text-primary: #F3F4F6 !important;
+  --dm-text-secondary: #9CA3AF !important;
+  --dm-header-border: rgba(255, 255, 255, 0.06) !important;
+  --dm-item-bg-hover: rgba(255, 255, 255, 0.06) !important;
+  --dm-item-bg-active: rgba(255, 255, 255, 0.1) !important;
+  --dm-btn-hover: rgba(255, 255, 255, 0.08) !important;
+  --dm-code-panel-bg: rgba(255, 255, 255, 0.06) !important;
+  --dm-code-panel-border: rgba(255, 255, 255, 0.05) !important;
+  --dm-code-filepath-bg: rgba(255, 255, 255, 0.03) !important;
+  --dm-code-filepath-border: rgba(255, 255, 255, 0.05) !important;
+  --dm-code-ln-color: #6B7280 !important;
+  --dm-code-ln-border: rgba(255, 255, 255, 0.08) !important;
+  --dm-code-text: #D1D5DB !important;
+
+  /* Syntax Highlighting - Dark */
+  --dm-hl-keyword: #C084FC !important;
+  --dm-hl-string: #FCD34D !important;
+  --dm-hl-comment: #6B7280 !important;
+  --dm-hl-tag: #60A5FA !important;
+  --dm-hl-attr: #F472B6 !important;
+  --dm-hl-number: #FB923C !important;
+  --dm-hl-fn: #38BDF8 !important;
+
+  /* Target Highlight backgrounds and text */
+  --dm-target-impl-bg: rgba(16, 185, 129, 0.12) !important;
+  --dm-target-impl-hover-bg: rgba(16, 185, 129, 0.22) !important;
+  --dm-target-usage-bg: rgba(96, 165, 250, 0.12) !important;
+  --dm-target-usage-hover-bg: rgba(96, 165, 250, 0.22) !important;
+  --dm-target-decl-bg: rgba(139, 92, 246, 0.12) !important;
+  --dm-target-decl-hover-bg: rgba(139, 92, 246, 0.22) !important;
+  --dm-target-ancestor-bg: rgba(156, 163, 175, 0.12) !important;
+  --dm-target-ancestor-hover-bg: rgba(156, 163, 175, 0.22) !important;
+
+  /* Component Name colors */
+  --dm-comp-impl: #34D399 !important;
+  --dm-comp-usage: #60A5FA !important;
+  --dm-comp-mixed: #FB923C !important;
+  --dm-comp-ancestor: #9CA3AF !important;
+
+  /* Badge text/bg */
+  --dm-badge-impl-text: #34D399 !important;
+  --dm-badge-impl-bg: rgba(52, 211, 153, 0.15) !important;
+  --dm-badge-usage-text: #60A5FA !important;
+  --dm-badge-usage-bg: rgba(96, 165, 250, 0.15) !important;
+  --dm-badge-mixed-text: #FB923C !important;
+  --dm-badge-mixed-bg: rgba(251, 146, 60, 0.15) !important;
+  --dm-badge-ancestor-text: #9CA3AF !important;
+  --dm-badge-ancestor-bg: rgba(156, 163, 175, 0.15) !important;
+
+  /* Scrollbar thumb */
+  --dm-scrollbar-thumb: rgba(255, 255, 255, 0.15) !important;
+  --dm-scrollbar-thumb-hover: rgba(255, 255, 255, 0.3) !important;
+  --dm-heat-lightness: 45% !important;
+}
+
+#debug-inspect-menu.theme-light {
+  /* Premium Light Theme variables */
+  --dm-bg: rgba(255, 255, 255, 0.96) !important;
+  --dm-border: rgba(0, 0, 0, 0.08) !important;
+  --dm-shadow: 0 12px 40px rgba(0, 0, 0, 0.22), 0 4px 12px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+  --dm-text-primary: #1F2937 !important;
+  --dm-text-secondary: #4B5563 !important;
+  --dm-header-border: rgba(0, 0, 0, 0.06) !important;
+  --dm-item-bg-hover: rgba(0, 0, 0, 0.04) !important;
+  --dm-item-bg-active: rgba(0, 0, 0, 0.08) !important;
+  --dm-btn-hover: rgba(0, 0, 0, 0.05) !important;
+  --dm-code-panel-bg: rgba(0, 0, 0, 0.02) !important;
+  --dm-code-panel-border: rgba(0, 0, 0, 0.05) !important;
+  --dm-code-filepath-bg: rgba(0, 0, 0, 0.02) !important;
+  --dm-code-filepath-border: rgba(0, 0, 0, 0.05) !important;
+  --dm-code-ln-color: #6B7280 !important;
+  --dm-code-ln-border: rgba(0, 0, 0, 0.08) !important;
+  --dm-code-text: #2D3748 !important;
+
+  /* Syntax Highlighting - Light */
+  --dm-hl-keyword: #7C3AED !important;
+  --dm-hl-string: #B45309 !important;
+  --dm-hl-comment: #8E9AA8 !important;
+  --dm-hl-tag: #1D4ED8 !important;
+  --dm-hl-attr: #BE185D !important;
+  --dm-hl-number: #C2410C !important;
+  --dm-hl-fn: #0369A1 !important;
+
+  /* Target Highlight backgrounds and text */
+  --dm-target-impl-bg: rgba(16, 185, 129, 0.08) !important;
+  --dm-target-impl-hover-bg: rgba(16, 185, 129, 0.16) !important;
+  --dm-target-usage-bg: rgba(96, 165, 250, 0.08) !important;
+  --dm-target-usage-hover-bg: rgba(96, 165, 250, 0.16) !important;
+  --dm-target-decl-bg: rgba(139, 92, 246, 0.08) !important;
+  --dm-target-decl-hover-bg: rgba(139, 92, 246, 0.16) !important;
+  --dm-target-ancestor-bg: rgba(156, 163, 175, 0.08) !important;
+  --dm-target-ancestor-hover-bg: rgba(156, 163, 175, 0.16) !important;
+
+  /* Component Name colors (darkened for contrast in light theme) */
+  --dm-comp-impl: #059669 !important;
+  --dm-comp-usage: #2563EB !important;
+  --dm-comp-mixed: #D97706 !important;
+  --dm-comp-ancestor: #4B5563 !important;
+
+  /* Badge text/bg */
+  --dm-badge-impl-text: #059669 !important;
+  --dm-badge-impl-bg: rgba(5, 150, 105, 0.1) !important;
+  --dm-badge-usage-text: #2563EB !important;
+  --dm-badge-usage-bg: rgba(37, 99, 235, 0.1) !important;
+  --dm-badge-mixed-text: #D97706 !important;
+  --dm-badge-mixed-bg: rgba(217, 119, 6, 0.1) !important;
+  --dm-badge-ancestor-text: #4B5563 !important;
+  --dm-badge-ancestor-bg: rgba(75, 85, 99, 0.1) !important;
+
+  /* Scrollbar thumb */
+  --dm-scrollbar-thumb: rgba(0, 0, 0, 0.15) !important;
+  --dm-scrollbar-thumb-hover: rgba(0, 0, 0, 0.3) !important;
+  --dm-heat-lightness: 60% !important;
+}
+
+#debug-inspect-menu.active {
+  opacity: 1 !important;
+  transform: scale(1) translateY(0) !important;
+}
+
+#debug-inspect-menu.semi-transparent {
+  opacity: 0.3 !important;
+  pointer-events: none !important;
+}
+
+.debug-menu-header {
+  padding: 4px 6px 4px 6px !important;
+  font-size: 10px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  color: var(--dm-text-secondary) !important;
+  border-bottom: 1px solid var(--dm-header-border) !important;
+  margin-bottom: 4px !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+.debug-theme-toggle {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 20px !important;
+  height: 20px !important;
+  border: none !important;
+  background: none !important;
+  color: var(--dm-text-secondary) !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+  transition: background-color 0.3s ease, color 0.3s ease !important;
+  padding: 0 !important;
+}
+
+.debug-theme-toggle:hover {
+  background-color: var(--dm-btn-hover) !important;
+  color: var(--dm-text-primary) !important;
+}
+
+.debug-menu-list {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1px !important;
+  max-height: min(700px, 70vh) !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
+
+.debug-menu-list::-webkit-scrollbar {
+  width: 6px !important;
+  height: 6px !important;
+}
+
+.debug-menu-list::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+.debug-menu-list::-webkit-scrollbar-thumb {
+  background: var(--dm-scrollbar-thumb) !important;
+  border-radius: 3px !important;
+}
+
+.debug-menu-list::-webkit-scrollbar-thumb:hover {
+  background: var(--dm-scrollbar-thumb-hover) !important;
+}
+
+.debug-menu-item-container {
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+  border-radius: 6px !important;
+  padding: 2px !important;
+  transition: background-color 0.3s ease, border-color 0.3s ease !important;
+}
+
+.debug-menu-item-container.impl-leaf {
+  background-color: rgba(16, 185, 129, 0.02) !important;
+  border: 1px dashed rgba(16, 185, 129, 0.2) !important;
+}
+
+.debug-menu-item-container.mixed-leaf {
+  background-color: rgba(251, 146, 60, 0.02) !important;
+  border: 1px dashed rgba(251, 146, 60, 0.2) !important;
+}
+
+.debug-menu-item-main {
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+  gap: 4px !important;
+}
+
+.debug-menu-item-toggle-code {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 24px !important;
+  height: 24px !important;
+  border: none !important;
+  background: none !important;
+  color: var(--dm-text-secondary) !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease !important;
+  flex-shrink: 0 !important;
+}
+
+.debug-menu-item-toggle-code:hover {
+  background-color: var(--dm-btn-hover) !important;
+  color: var(--dm-text-primary) !important;
+}
+
+.debug-menu-item-toggle-code.open {
+  transform: rotate(90deg) !important;
+  color: #10B981 !important;
+}
+
+.debug-menu-item-click-target {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 1px !important;
+  flex-grow: 1 !important;
+  padding: 4px 6px !important;
+  background: none !important;
+  border: none !important;
+  border-radius: 6px !important;
+  cursor: pointer !important;
+  text-align: left !important;
+  color: var(--dm-text-primary) !important;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.15s ease !important;
+  font-family: inherit !important;
+  overflow: hidden !important;
+}
+
+.debug-menu-item-click-target:hover {
+  background-color: var(--dm-item-bg-hover) !important;
+  transform: translateX(2px) !important;
+}
+
+.debug-menu-item-click-target:active {
+  background-color: var(--dm-item-bg-active) !important;
+}
+
+.debug-menu-header,
+.debug-menu-item-name,
+.debug-menu-item-badge,
+.debug-code-filepath,
+.debug-code-container,
+.debug-code-line,
+.debug-code-ln,
+.debug-code-content,
+.debug-code-content span,
+.debug-theme-toggle {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease !important;
+}
+
+.debug-menu-item-title {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+  gap: 8px !important;
+}
+
+.debug-menu-item-name {
+  font-weight: 600 !important;
+  color: var(--dm-text-primary) !important;
+  font-size: 13px !important;
+}
+
+.debug-menu-item-name.impl {
+  color: var(--dm-comp-impl) !important;
+}
+
+.debug-menu-item-name.usage {
+  color: var(--dm-comp-usage) !important;
+}
+
+.debug-menu-item-name.mixed {
+  color: var(--dm-comp-mixed) !important;
+}
+
+.debug-menu-item-name.ancestor {
+  color: var(--dm-comp-ancestor) !important;
+}
+
+.debug-menu-item-badge {
+  font-size: 9px !important;
+  padding: 2px 6px !important;
+  border-radius: 4px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.03em !important;
+}
+
+.debug-menu-item-badge.impl {
+  color: var(--dm-badge-impl-text) !important;
+  background-color: var(--dm-badge-impl-bg) !important;
+}
+
+.debug-menu-item-badge.usage {
+  color: var(--dm-badge-usage-text) !important;
+  background-color: var(--dm-badge-usage-bg) !important;
+}
+
+.debug-menu-item-badge.mixed {
+  color: var(--dm-badge-mixed-text) !important;
+  background-color: var(--dm-badge-mixed-bg) !important;
+}
+
+.debug-menu-item-badge.ancestor {
+  color: var(--dm-badge-ancestor-text) !important;
+  background-color: var(--dm-badge-ancestor-bg) !important;
+}
+
+.debug-code-filepath {
+  padding: 4px 8px !important;
+  font-size: 10px !important;
+  color: var(--dm-text-secondary) !important;
+  background-color: var(--dm-code-filepath-bg) !important;
+  border-bottom: 1px solid var(--dm-code-filepath-border) !important;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  user-select: text !important;
+  text-align: left !important;
+}
+
+.debug-menu-item-code-panel {
+  max-height: 0 !important;
+  overflow: hidden !important;
+  transition: max-height 0.25s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease, border-color 0.3s ease !important;
+  width: 100% !important;
+}
+
+.debug-menu-item-code-panel.open {
+  border-top: 1px solid var(--dm-code-panel-border) !important;
+  margin-top: 4px !important;
+  background-color: var(--dm-code-panel-bg) !important;
+  border-radius: 4px !important;
+}
+
+.debug-menu-item-code-panel::-webkit-scrollbar {
+  width: 4px !important;
+  height: 4px !important;
+}
+
+.debug-menu-item-code-panel::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+.debug-menu-item-code-panel::-webkit-scrollbar-thumb {
+  background: var(--dm-scrollbar-thumb) !important;
+  border-radius: 2px !important;
+}
+
+.debug-menu-item-code-panel::-webkit-scrollbar-thumb:hover {
+  background: var(--dm-scrollbar-thumb-hover) !important;
+}
+
+.debug-code-loading,
+.debug-code-error {
+  padding: 8px 12px !important;
+  font-size: 11px !important;
+  font-style: italic !important;
+  color: var(--dm-text-secondary) !important;
+}
+
+.debug-code-error {
+  color: #EF4444 !important;
+}
+
+.debug-code-container {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
+  font-size: 11px !important;
+  line-height: 1.5 !important;
+  color: var(--dm-code-text) !important;
+  padding: 6px 0 !important;
+  tab-size: 2 !important;
+  -moz-tab-size: 2 !important;
+}
+
+.debug-code-line {
+  display: flex !important;
+  align-items: flex-start !important;
+  width: 100% !important;
+  padding: 1px 0 !important;
+}
+
+.debug-code-line.target {
+  background-color: var(--dm-target-impl-bg) !important;
+  border-left: 3px solid #10B981 !important;
+  cursor: pointer !important;
+  transition: background-color 0.2s ease !important;
+}
+
+.debug-code-line.target.impl {
+  background-color: var(--dm-target-impl-bg) !important;
+  border-left: 3px solid #10B981 !important;
+}
+
+.debug-code-line.target.impl:hover {
+  background-color: var(--dm-target-impl-hover-bg) !important;
+}
+
+.debug-code-line.target.usage {
+  background-color: var(--dm-target-usage-bg) !important;
+  border-left: 3px solid #60A5FA !important;
+}
+
+.debug-code-line.target.usage:hover {
+  background-color: var(--dm-target-usage-hover-bg) !important;
+}
+
+.debug-code-line.target.decl {
+  background-color: var(--dm-target-decl-bg) !important;
+  border-left: 3px solid #8B5CF6 !important;
+}
+
+.debug-code-line.target.decl:hover {
+  background-color: var(--dm-target-decl-hover-bg) !important;
+}
+
+.debug-code-line.target.ancestor {
+  background-color: var(--dm-target-ancestor-bg) !important;
+  border-left: 3px solid #9CA3AF !important;
+}
+
+.debug-code-line.target.ancestor:hover {
+  background-color: var(--dm-target-ancestor-hover-bg) !important;
+}
+
+.debug-code-ln {
+  width: 36px !important;
+  text-align: right !important;
+  padding-right: 8px !important;
+  color: var(--dm-code-ln-color) !important;
+  user-select: none !important;
+  flex-shrink: 0 !important;
+  border-right: 1px solid var(--dm-code-ln-border) !important;
+  margin-right: 8px !important;
+}
+
+.debug-code-line.target .debug-code-ln {
+  color: var(--dm-comp-impl) !important;
+  font-weight: bold !important;
+}
+
+.debug-code-line.target.impl .debug-code-ln {
+  color: var(--dm-comp-impl) !important;
+  font-weight: bold !important;
+}
+
+.debug-code-line.target.usage .debug-code-ln {
+  color: var(--dm-comp-usage) !important;
+  font-weight: bold !important;
+}
+
+.debug-code-line.target.decl .debug-code-ln {
+  color: var(--dm-hl-keyword) !important;
+  font-weight: bold !important;
+}
+
+.debug-code-line.target.ancestor .debug-code-ln {
+  color: var(--dm-comp-ancestor) !important;
+  font-weight: bold !important;
+}
+
+.debug-code-content {
+  white-space: pre-wrap !important;
+  word-break: break-all !important;
+  flex-grow: 1 !important;
+  padding-right: 8px !important;
+}
+
+.hl-keyword {
+  color: var(--dm-hl-keyword) !important;
+  font-weight: 500 !important;
+}
+
+.hl-string {
+  color: var(--dm-hl-string) !important;
+}
+
+.hl-comment {
+  color: var(--dm-hl-comment) !important;
+  font-style: italic !important;
+}
+
+.hl-tag {
+  color: var(--dm-hl-tag) !important;
+}
+
+.hl-attr {
+  color: var(--dm-hl-attr) !important;
+}
+
+.hl-number {
+  color: var(--dm-hl-number) !important;
+}
+
+.hl-fn {
+  color: var(--dm-hl-fn) !important;
+}
+
+.debug-toast {
+  position: fixed !important;
+  transform: translate(-50%, -50%) scale(0.8) !important;
+  opacity: 0 !important;
+  background-color: #10B981 !important;
+  color: #ffffff !important;
+  padding: 6px 12px !important;
+  border-radius: 6px !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+  pointer-events: none !important;
+  z-index: 999999999 !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* Context Menu Git Metadata */
+.debug-menu-item-meta-wrap {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  flex-grow: 1 !important;
+}
+
+.debug-menu-item-git-meta {
+  font-size: 8.5px !important;
+  color: var(--dm-text-secondary) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 3px !important;
+  opacity: 0 !important;
+  transform: translateX(4px) !important;
+  transition: opacity 0.25s ease, transform 0.25s ease !important;
+}
+
+.debug-menu-item-git-meta.loaded {
+  opacity: 0.65 !important;
+  transform: translateX(0) !important;
+}
+
+.debug-menu-item-git-meta .git-author {
+  font-weight: 600 !important;
+}
+
+/* Code Header Git Info */
+.debug-code-filepath {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+}
+
+.debug-code-git-info {
+  font-size: 9px !important;
+  color: var(--dm-comp-impl) !important;
+  opacity: 0.85 !important;
+  background-color: rgba(16, 185, 129, 0.08) !important;
+  padding: 1px 6px !important;
+  border-radius: 4px !important;
+  border: 1px solid rgba(16, 185, 129, 0.15) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+}
+
+.theme-light .debug-code-git-info {
+  color: #059669 !important;
+  background-color: rgba(5, 150, 105, 0.05) !important;
+  border: 1px solid rgba(5, 150, 105, 0.1) !important;
+}
+
+.debug-code-git-info .git-branch {
+  font-weight: 600 !important;
+  color: var(--dm-text-primary) !important;
+}
+
+.debug-code-git-info .git-author {
+  font-weight: 600 !important;
+}
+
+.debug-code-git-info .git-subject {
+  font-style: italic !important;
+  max-width: 150px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  display: inline-block !important;
+  vertical-align: bottom !important;
+}
+
+/* Heatmap code lines */
+.debug-code-line.git-heatmap {
+  background-color: hsla(var(--line-heat-hue), var(--line-heat-sat), var(--dm-heat-lightness, 50%), calc(var(--line-heat-score) * 0.1 + 0.02)) !important;
+  border-left: 3px solid hsla(var(--line-heat-hue), var(--line-heat-sat), var(--dm-heat-lightness, 50%), calc(var(--line-heat-score) * 0.4 + 0.05)) !important;
+}
+
+.debug-code-line.git-heatmap:hover {
+  background-color: hsla(var(--line-heat-hue), var(--line-heat-sat), var(--dm-heat-lightness, 50%), calc(var(--line-heat-score) * 0.15 + 0.05)) !important;
+}
+
+.debug-code-line.git-heatmap.target {
+  /* Retain target left border colors for clear debugging context */
+  border-left-width: 3px !important;
+  border-left-style: solid !important;
+}
+
+.debug-code-line.git-heatmap.target.impl {
+  border-left-color: #10B981 !important;
+}
+
+.debug-code-line.git-heatmap.target.usage {
+  border-left-color: #60A5FA !important;
+}
+
+.debug-code-line.git-heatmap.target.decl {
+  border-left-color: #8B5CF6 !important;
+}
+
+.debug-code-line.git-heatmap.target.ancestor {
+  border-left-color: #9CA3AF !important;
+}
+
+/* Blame Tooltip */
+#debug-git-tooltip {
+  /* Default Dark Theme variables */
+  --dm-bg: rgba(36, 36, 47, 0.97) !important;
+  --dm-border: rgba(255, 255, 255, 0.12) !important;
+  --dm-shadow: 0 12px 40px rgba(0, 0, 0, 0.65), 0 4px 12px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+  --dm-text-primary: #F9FAFB !important;
+  --dm-text-secondary: #D1D5DB !important;
+  --dm-comp-impl: #34D399 !important;
+  --dm-code-filepath-bg: rgba(255, 255, 255, 0.06) !important;
+  --dm-code-filepath-border: rgba(255, 255, 255, 0.1) !important;
+  --dm-code-panel-border: rgba(255, 255, 255, 0.1) !important;
+
+  background-color: var(--dm-bg) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid var(--dm-border) !important;
+  border-radius: 8px !important;
+  box-shadow: var(--dm-shadow) !important;
+  padding: 8px 12px !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  font-size: 11px !important;
+  color: var(--dm-text-primary) !important;
+  max-width: 280px !important;
+  line-height: 1.4 !important;
+  opacity: 0 !important;
+  transform: translateY(4px) scale(0.98) !important;
+  transition: opacity 0.15s ease, transform 0.15s ease, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease !important;
+}
+
+#debug-git-tooltip.theme-light {
+  /* Premium Light Theme variables */
+  --dm-bg: rgba(255, 255, 255, 0.96) !important;
+  --dm-border: rgba(0, 0, 0, 0.08) !important;
+  --dm-shadow: 0 12px 40px rgba(0, 0, 0, 0.22), 0 4px 12px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+  --dm-text-primary: #1F2937 !important;
+  --dm-text-secondary: #4B5563 !important;
+  --dm-comp-impl: #059669 !important;
+  --dm-code-filepath-bg: rgba(0, 0, 0, 0.02) !important;
+  --dm-code-filepath-border: rgba(0, 0, 0, 0.05) !important;
+  --dm-code-panel-border: rgba(0, 0, 0, 0.05) !important;
+}
+
+#debug-git-tooltip.active {
+  opacity: 1 !important;
+  transform: translateY(0) scale(1) !important;
+}
+
+#debug-git-tooltip .tooltip-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  margin-bottom: 3px !important;
+  gap: 12px !important;
+  width: 100% !important;
+}
+
+#debug-git-tooltip .tooltip-author {
+  font-weight: 600 !important;
+  color: var(--dm-comp-impl) !important;
+  font-size: 11px !important;
+}
+
+#debug-git-tooltip .tooltip-hash {
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace !important;
+  background-color: var(--dm-code-filepath-bg) !important;
+  padding: 1px 4px !important;
+  border-radius: 3px !important;
+  border: 1px solid var(--dm-code-filepath-border) !important;
+  color: var(--dm-text-secondary) !important;
+  font-size: 10px !important;
+}
+
+#debug-git-tooltip .tooltip-time {
+  color: var(--dm-text-secondary) !important;
+  font-size: 10px !important;
+  margin-bottom: 5px !important;
+}
+
+#debug-git-tooltip .tooltip-summary {
+  color: var(--dm-text-primary) !important;
+  word-break: break-word !important;
+  font-size: 11px !important;
+  border-top: 1px solid var(--dm-code-panel-border) !important;
+  padding-top: 4px !important;
+}
+
+/* Render Visualizer & Heatmap toggle button */
+.debug-visualizer-toggle {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 20px !important;
+  height: 20px !important;
+  border: none !important;
+  background: none !important;
+  color: var(--dm-text-secondary) !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease !important;
+  padding: 0 !important;
+}
+
+.debug-visualizer-toggle:hover {
+  background-color: var(--dm-btn-hover) !important;
+  color: var(--dm-text-primary) !important;
+}
+
+.debug-visualizer-toggle.active {
+  color: #EF4444 !important;
+  /* Red color when active */
+  filter: drop-shadow(0 0 2px rgba(239, 68, 68, 0.4)) !important;
+}
+
+/* Render Visualizer & Heatmap flash animation */
+@keyframes debug-flash-anim {
+  0% {
+    outline: 2px solid var(--flash-color, rgba(0, 255, 0, 0.85)) !important;
+    outline-offset: -2px !important;
+    box-shadow: inset 0 0 0 2px var(--flash-color, rgba(0, 255, 0, 0.85)), 0 0 10px var(--flash-color, rgba(0, 255, 0, 0.85)) !important;
+  }
+
+  100% {
+    outline: 2px solid transparent !important;
+    outline-offset: -2px !important;
+    box-shadow: inset 0 0 0 0 transparent, 0 0 0 transparent !important;
+  }
+}
+
+.debug-render-flash {
+  animation: debug-flash-anim 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
+}
+
+/* Render statistics badge style */
+.debug-render-stat-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  font-size: 10px !important;
+  font-weight: 600 !important;
+  padding: 1px 6px !important;
+  border-radius: 10px !important;
+  margin-left: 6px !important;
+  line-height: 1 !important;
+  vertical-align: middle !important;
+  background-color: hsla(var(--badge-hue), 100%, 40%, 0.15) !important;
+  border: 1px solid hsla(var(--badge-hue), 100%, 45%, 0.25) !important;
+  color: hsla(var(--badge-hue), 100%, 55%, 1) !important;
+  /* Default dark mode/high contrast */
+}
+
+/* In light theme, make text color darker for green/yellow hues to have high contrast */
+.theme-light .debug-render-stat-badge {
+  background-color: hsla(var(--badge-hue), 100%, 40%, 0.12) !important;
+  color: hsla(var(--badge-hue), 100%, 25%, 1) !important;
+  border: 1px solid hsla(var(--badge-hue), 100%, 45%, 0.20) !important;
+}
