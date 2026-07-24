@@ -1,5 +1,6 @@
 export const KNOWN_EDITORS_LIST = [
   "antigravity",
+  "antigravity-ide",
   "code",
   "code-insiders",
   "codium",
@@ -40,12 +41,6 @@ export const KNOWN_EDITORS_LIST = [
   "webstorm64",
   "goland64",
   "rider64",
-] as const;
+];
 
-export type KnownEditor = (typeof KNOWN_EDITORS_LIST)[number];
-
-export const VITE_KNOWN_EDITORS = new Set<string>(KNOWN_EDITORS_LIST);
-
-export interface DebugMetaPluginOptions {
-  editor?: KnownEditor | (string & {});
-}
+export const VITE_KNOWN_EDITORS = new Set(KNOWN_EDITORS_LIST);

@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-debug-meta",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Vite plugin to inject debug metadata (file paths and component names) into React JSX/TSX elements for inspect-on-click functionality.",
   "main": "./dist/vite-plugin-debug-meta.js",
   "module": "./dist/vite-plugin-debug-meta.mjs",
@@ -16,7 +16,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "node scripts/build-css.js && tsup --entry.vite-plugin-debug-meta vite-plugin-debug-meta/index.ts --format cjs,esm --dts --clean",
+    "build": "node scripts/build-css.js && tsup --entry.vite-plugin-debug-meta vite-plugin-debug-meta/index.js --format cjs,esm --dts --clean",
     "prepublishOnly": "npm run build"
   },
   "keywords": [

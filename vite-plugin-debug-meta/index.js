@@ -1,19 +1,17 @@
-import type { Plugin } from "vite";
-import { installDebugClick } from "./client/client";
-import { clientStyles } from "./client/style";
-import { openInEditor } from "./server/editor";
-import { handleGetSourceCode } from "./server/source-code";
-import { handleGetGitInfo } from "./server/git";
-import { transformCode } from "./server/transform";
-import type { DebugMetaPluginOptions } from "./types";
+import { installDebugClick } from "./client/client.js";
+import { clientStyles } from "./client/style.js";
+import { openInEditor } from "./server/editor.js";
+import { transformCode } from "./server/transform.js";
+import { CONFIG } from "./client/constants.js";
 
-export type { DebugMetaPluginOptions, KnownEditor } from "./types";
-
-export function debugMetaPlugin(options?: DebugMetaPluginOptions): Plugin {
+export function debugMetaPlugin(options) {
   if (options?.editor) {
     process.env.LAUNCH_EDITOR = options.editor;
   }
-  const clickHandlerScript = `(${installDebugClick.toString()})();`;
+  const clickHandlerScript = `
+    const DEBUG_CONFIG = ${JSON.stringify(CONFIG)};
+    (${installDebugClick.toString()})();
+  `;
 
   return {
     name: "debug-meta-plugin",
@@ -27,7 +25,7 @@ export function debugMetaPlugin(options?: DebugMetaPluginOptions): Plugin {
           return;
         }
 
-        let url: URL;
+        let url;
         try {
           const fullUrl = req.url.startsWith("http") ? req.url : `http://localhost${req.url}`;
           url = new URL(fullUrl);
@@ -38,7 +36,7 @@ export function debugMetaPlugin(options?: DebugMetaPluginOptions): Plugin {
 
         if (url.pathname === "/__open-in-editor") {
           const file = url.searchParams.get("file");
-          const editor = options?.editor || process.env.LAUNCH_EDITOR;
+          const editor = options?.editor ?? process.env.LAUNCH_EDITOR ?? "code";
 
           if (file && editor) {
             const handled = openInEditor(file, editor, server.config.root);
@@ -48,16 +46,6 @@ export function debugMetaPlugin(options?: DebugMetaPluginOptions): Plugin {
               return;
             }
           }
-        }
-
-        if (url.pathname === "/__get-source-code") {
-          handleGetSourceCode(url, server.config.root, res);
-          return;
-        }
-
-        if (url.pathname === "/__get-git-info") {
-          handleGetGitInfo(url, server.config.root, res);
-          return;
         }
 
         next();
@@ -80,7 +68,7 @@ export function debugMetaPlugin(options?: DebugMetaPluginOptions): Plugin {
       ];
     },
 
-    transform(code: string, id: string) {
+    transform(code, id) {
       return transformCode(code, id);
     },
   };
